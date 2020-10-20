@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Dashboard Covid 19 Indonesia</title>
+  <meta name="description"
+    content="Dashboard Covid 19 Indonesia. Data kasus per provinsi dan informasi lainnya terkait penanganan Covid 19">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pertemuan3-dashboard-covid-19.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300&display=swap" rel="stylesheet">
+ 
+</head>
+
+<body>
+  
+  <nav class="navbar navbar-dark bg-dark">
+    <img src="img/1.png" alt="">
+    <a class="navbar-brand"></a>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="ketik disini" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+    </form>
+  </nav>
+  
+  <!-- Header dashboard -->
+  <header id="nav-atas">
+    <div class="container">
+      <div id="nav-atas-logo">
+        <div id="nav-atas-logo-tulisan">
+          <h1>Dashboard COVID-19 Indonesia</h1>
+        </div>
+      </div>
+      <ul id="nav-atas-menu">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#konten">Kasus</a>
+        </li>
+        <li>
+          <a href="#">Bantuan Sosial</a>
+        </li>
+        <li>
+          <a href="#">Donasi</a>
+        </li>
+        <li>
+          <a href="#">Kontak</a>
+        </li>
+        <li>
+          <a href="#" class="button" id="button-download-app">Download App</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Konten utama dashboard -->
+  <div class="konten" id="konten">
+    <header>
+      <h1>Dashboard Statistik Kasus COVID-19 Indonesia</h1>
+      <small>Update Terakhir: Senin, 5 Okt 2020</small>
+    </header>
+    <section class="flex-container" id="konten-rangkuman-kasus">
+      <div class="round-box">
+        <h4>Total terkonfirmasi</h4>
+        <p>307,120 <br>+3,622 Kasus</p>
+      </div>
+      <div class="round-box">
+        <h4>Isolasi / dalam perawatan</h4>
+        <p>63,274</p>
+      </div>
+      <div class="round-box">
+        <h4>Selesai isolasi / dalam perawatan</h4>
+        <p>232,243</p>
+      </div>
+      <div class="round-box">
+        <h4>Meninggal</h4>
+        <p>11,253</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bagian footer dari dashboard -->
+  <footer id="footer">
+    <p>Tim Pengelola Dashboard COVID-19 Indonesia</p>
+  </footer>
+</body>
+
+</html>
