@@ -1,0 +1,205 @@
+ <script>
+    //   Membuat function prosesPerhitungan
+      function prosesPerhitungan() {
+        // menampilkan string di console 
+        console.log("Fungsi prosesPerhitungan() dipanggil");
+
+        // memilih nilai dari id input-j (Jumlah total ranjang di rumah sakit)
+        var j = document.getElementById("input-j").value;
+
+        // memilih nilai dari id input-t (Jumlah total ranjang di rumah sakit yang terisi)
+        var t = document.getElementById("input-t").value;
+
+        // Buat formula untuk menghitung persentase keterisian ranjang (ptj) !
+        // Persentase keterisian ranjang = ranjang yang terisi dibagi dengan total ranjang
+        
+        
+        var ptj = t / j;
+
+        // menampilkan text melalui output-ptj
+        document.getElementById("output-ptj").textContent = ptj + " %";
+
+        /*
+            Buat formula untuk menampilkan kondisi keterisian ranjang (k)
+            Jika dibawah 30%, kondisi = AMAN
+            Jika 30% - 70%, kondisi = WASPADA
+            Jika diatas 70%, kondisi = DARURAT
+          */
+        var k = "";
+        if (ptj <= 0.3) {
+            k = "AMAN"
+        } else if (ptj <= 0.7) {
+            k = "WASPADA"
+        } else if (ptj > 0.7) {
+            k = "DARURAT"
+        }
+
+        // menampilkan ketersediaan ranjang (k) melalui it output-k
+        document.getElementById("output-k").textContent = k;
+      }
+    </script>
+
+
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Dashboard Covid 19 Indonesia</title>
+  <meta name="description"
+    content="Dashboard Covid 19 Indonesia. Data kasus per provinsi dan informasi lainnya terkait penanganan Covid 19">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pertemuan3-dashboard-covid-19.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300&display=swap" rel="stylesheet">
+ 
+</head>
+
+<body>
+  
+  <nav>
+  
+<ul><img src="img/1.png">
+<li><a href="#">Home</a></li>
+<li><a href="#konten">Kasus</a></li>
+<li><a href="#">Bantuan Sosial</a></li>
+<li><a href="#">Donasi</a></li>
+<li><a href="#">Kontak</a></li>
+</ul>
+</nav>
+  
+  <!-- Header dashboard -->
+  <header id="nav-atas">
+   <img src="img/2.jpg" width="1280" height="500">
+  </header>
+
+
+  <!-- Konten utama dashboard -->
+  <div class="konten" id="konten">
+    <header>
+      <h1>Dashboard Statistik Kasus COVID-19 Indonesia</h1>
+      <small>Update Terakhir: Senin, 5 Okt 2020</small>
+    </header>
+    <section class="flex-container" id="konten-rangkuman-kasus">
+      <div class="round-box">
+        <h4>Total terkonfirmasi</h4>
+        <p>307,120 <br>+3,622 Kasus</p>
+      </div>
+      <div class="round-box">
+        <h4>Isolasi / dalam perawatan</h4>
+        <p>63,274</p>
+      </div>
+      <div class="round-box">
+        <h4>Selesai isolasi / dalam perawatan</h4>
+        <p>232,243</p>
+      </div>
+      <div class="round-box">
+        <h4>Meninggal</h4>
+        <p>11,253</p>
+      </div>
+    </section>
+  </div>
+ 
+	 </div>
+   <div class="konten" id="konten">
+   <h1>Keterisian Ranjang di Rumah Sakit Ketika Covid-19</h1>
+    <form>
+      <table>
+        <tr>
+          <td>Jumlah total ranjang di rumah sakit</td>
+          <td><input id="input-j"></td>
+        </tr>
+        <tr>
+          <td>Jumlah total ranjang di rumah sakit yang terisi</td>
+          <td><input id="input-t"></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><input type="button" id="input-button" value="Kalkulasi Keterisian Ranjang di Rumah Sakit" onclick="prosesPerhitungan()"></td>
+        </tr>
+        <tr>
+          <td>Persentase keterisian</td>
+          <td><p id="output-ptj"></p></td>
+        </tr>
+        <tr>
+          <td>Kondisi</td>
+          <td><p id="output-k"></p></td>
+        </tr>
+      </table> 
+    </form>
+</div>
+<div class="konten" id="konten">
+<h4 class="pb-2">Daftar Rumah Sakit Rujukan di Jawa Barat
+        </h4>
+        <div class="flex-container">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama RS</th>
+                <th scope="col">Alamat</th>
+                <th scope="col">No. Telepon</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>RSU Dr. Hasan Sadikin</td>
+                <td>Jl. Pasteur No. 38,<br> Kota Bandung</td>
+                <td>@+62 22 2034 953</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>RSAU Dr. M. Salamun Bandung</td>
+                <td>Jl. Ciumbuleuit No.203,<br> Kota Bandung</td>
+                <td>@+62 22 2032090</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>RSTP Dr. H. A. Rotinsulu</td>
+                <td>Jl. Bukit Jarian No.40, Hegarmanah,<br> Kota Bandung</td>
+                <td>@+62 22 2034446</td>
+              </tr>
+            </tbody>
+          </table> 
+        </div>
+        
+      </div>
+      <!-- /.col-lg-9 -->
+      
+
+  <div class="card text-center">
+  
+    <div class="card-body">
+      <div class="row">
+        <div class="col-centered">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Call Center</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Nomor Darurat</h6>
+              <p style="font-size: 30px" class="card-text"><i class="fa fa-phone "></i> 199</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-centered">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Hotline Pikobar</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Chat WA seputar COVID-19</h6>
+              <p style="font-size: 25px" class="card-text"><i class="fa fa-whatsapp "></i>Klik untuk chat</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+  <!-- Bagian footer dari dashboard -->
+  <footer id="footer">
+    <p>Tim Pengelola Dashboard COVID-19 Indonesia</p>
+  </footer>
+</body>
+
+</html>
