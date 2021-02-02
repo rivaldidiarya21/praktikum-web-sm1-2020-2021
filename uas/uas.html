@@ -1,0 +1,305 @@
+ 
+
+ <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.css" integrity="sha512-C7hOmCgGzihKXzyPU/z4nv97W0d9bv4ALuuEbSf6hm93myico9qa0hv4dODThvCsqQUmKmLcJmlpRmCaApr83g==" crossorigin="anonymous" />
+
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Dashboard Covid 19 Indonesia</title>
+  <meta name="description"
+    content="Dashboard Covid 19 Indonesia. Data kasus per provinsi dan informasi lainnya terkait penanganan Covid 19">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="uas.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300&display=swap" rel="stylesheet">
+ 
+</head>
+
+<body>
+  
+  <nav>
+  
+<ul><img src="img/1.png">
+<li><a href="#">Home</a></li>
+<li><a href="#konten">Kasus</a></li>
+<li><a href="#">Bantuan Sosial</a></li>
+<li><a href="#">Donasi</a></li>
+<li><a href="#">Kontak</a></li>
+</ul>
+</nav>
+  
+  <!-- Header dashboard -->
+  <header id="nav-atas">
+   <img src="img/2.jpg" width="1280" height="500">
+  </header>
+
+<div class="konten" id="konten">
+            <br>
+        <div class="card">
+            <div class="card-header">
+                Apa yang Harus Dilakukan
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Ketahui Risiko dari COVID-19</h5>
+                <p class="card-text">COVID-19 merupakan penyakit yang disebabkan Novel Coronavirus 2019. Meski bergejala mirip dengan flu biasa, COVID-19 sampai saat ini memiliki fatalitas lebih tinggi. Virus ini juga menyebar dengan sangat cepat karena bisa pindah dari orang ke orang bahkan sebelum orang tersebut menunjukkan gejala.</p>
+                <a href="#" class="btn btn-success">Periksa Diri Saya</a>
+            </div>
+        </div>
+		</div>
+		
+  <!-- Konten utama dashboard -->
+  <div class="konten" id="konten">
+    <header>
+      <h1>Dashboard Statistik Kasus COVID-19 Indonesia</h1>
+      <small>Update Terakhir: Senin, 5 Okt 2020</small>
+    </header>
+    <section class="flex-container" id="konten-rangkuman-kasus">
+      <div class="round-box">
+        <h4>Total terkonfirmasi</h4>
+        <p>307,120 <br>+3,622 Kasus</p>
+      </div>
+      <div class="round-box">
+        <h4>Isolasi / dalam perawatan</h4>
+        <p>63,274</p>
+      </div>
+      <div class="round-box">
+        <h4>Selesai isolasi / dalam perawatan</h4>
+        <p>232,243</p>
+      </div>
+      <div class="round-box">
+        <h4>Meninggal</h4>
+        <p>11,253</p>
+      </div>
+    </section>
+  </div>
+ 
+	 </div>
+  
+<div class="konten" id="konten">
+<canvas id="canvas-untuk-menggambar-grafik"></canvas>
+
+                    <script>
+                
+                        function buatDataUntukGrafik(dataPenduduk,dataDokter) {
+                
+                            console.log(dataPenduduk.nilai_per_wilayah);
+                
+                            // Tokoh utama, function map() dari array
+                            var label = dataPenduduk.nilai_per_wilayah.map(function(satuanData) {
+                                return satuanData.wilayah;
+                            });
+                
+                            var jumlahDokter = dataDokter.nilai_per_wilayah.map(function(satuanData) {
+                                return satuanData.nilai_per_tahun[0].nilai;
+                            });
+                
+                            var jumlahPenduduk = dataPenduduk.nilai_per_wilayah.map(function(satuanData) {
+                                return satuanData.nilai_per_tahun[0].nilai;
+                            });
+                
+                            var jumlahPendudukPerDokter = jumlahPenduduk.map(function(satuanData, urutan){
+                                return Math.round(jumlahPenduduk[urutan] / jumlahDokter[urutan]);
+                            });
+                
+                            var garisIdealWHOPendudukPerDokter = jumlahPenduduk.map(function(){
+                                return 1000;
+                            });
+                
+                            var garisIdealBPJSPendudukPerDokter = jumlahPenduduk.map(function(){
+                                return 5000;
+                            });
+                
+                            var dataUntukGrafik = {
+                                labels: label,
+                                datasets: [{
+                                    label: "Ideal Jumlah Penduduk per 1 Dokter - WHO",
+                                    borderColor: "rgb(100, 0, 0)",
+                                    borderWidth: 1, 
+                                    yAxisID: "sumbu-y-kanan",
+                                    data: garisIdealWHOPendudukPerDokter,
+                                    type: 'line'
+                                }, {
+                                    label: "Ideal Jumlah Penduduk per 1 Dokter - BPJS",
+                                    borderColor: "rgb(100, 0, 0)",
+                                    borderWidth: 3, 
+                                    yAxisID: "sumbu-y-kanan",
+                                    data: garisIdealBPJSPendudukPerDokter,
+                                    type: 'line'
+                                }, {
+                                    label: "Jumlah Penduduk",
+                                    backgroundColor: "rgb(153, 102, 255)",
+                                    yAxisID: "sumbu-y-kiri",
+                                    data: jumlahPenduduk
+                                }, {
+                                    label: "Jumlah Penduduk per 1 Dokter",
+                                    backgroundColor: "rgb(255, 64, 64)",
+                                    yAxisID: "sumbu-y-kanan",
+                                    data: jumlahPendudukPerDokter
+                                }]
+                            };
+                            return dataUntukGrafik;
+                        }
+                
+                        function buatGrafik(dataPenduduk, dataDokter) {
+                            console.log("Eksekusi buatGrafik(dataPenduduk, dataDokter)");
+                            // console.log(dataPenduduk);
+                            // console.log(dataDokter);
+                
+                            var elemenCanvas = document.getElementById("canvas-untuk-menggambar-grafik");
+                            var penggambarCanvas = elemenCanvas.getContext("2d");
+                
+                            // label ["Januari", "Februari", "Maret"], nilai data [300, 400, 250]
+                            var judulGrafik = "Grafik Rasio Jumlah Penduduk Per 1 Dokter";
+                            var dataUntukGrafik = buatDataUntukGrafik(dataPenduduk, dataDokter);
+                
+                            var konfigurasiChartJs = {
+                                type: 'bar',
+                                data: dataUntukGrafik,
+                                options:{
+                                    responsive: true,
+                                    title: {
+                                        display: true,
+                                        text: judulGrafik
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            type: 'linear',
+                                            display: true,
+                                            position: 'left',
+                                            ticks: {
+                                                min: 0
+                                            },
+                                            id: 'sumbu-y-kiri'
+                                        }, {
+                                            type: 'linear',
+                                            display: true,
+                                            position: 'right',
+                                            ticks: {
+                                                min: 0
+                                            },
+                                            id: 'sumbu-y-kanan'
+                                        }]
+                                    }
+                                }
+                            };
+                
+                            var grafik = new Chart(penggambarCanvas, konfigurasiChartJs);
+                
+                        }
+                
+                        window.onload = function() {
+                
+                            // Menyiapkan data untuk grafik
+                            var urlDataPenduduk = "https://mechaid.github.io/course-materials/praktikum-web/2020-2021/contoh/json-api-ke-chart/penduduk-jawa-barat-2019.json"
+                            var urlDataDokter = "https://mechaid.github.io/course-materials/praktikum-web/2020-2021/contoh/json-api-ke-chart/dokter-jawa-barat-2019.json"
+                
+                            var dataPenduduk, dataDokter;
+                
+                            // XMLHttpRequest
+                            // Request Data Penduduk
+                            var requestDataPenduduk = new XMLHttpRequest();
+                            requestDataPenduduk.open("GET", urlDataPenduduk, true);
+                            requestDataPenduduk.onreadystatechange = function() {
+                                if(this.readyState == 4 && this.status == 200) {
+                                    dataPenduduk = JSON.parse(this.responseText);
+                
+                                    if(dataDokter !== undefined) {
+                                        buatGrafik(dataPenduduk, dataDokter);
+                                    }
+                                }
+                            };
+                            requestDataPenduduk.send();
+                
+                            // Request Data Dokter
+                            var requestDataDokter = new XMLHttpRequest();
+                            requestDataDokter.open("GET", urlDataDokter, true);
+                            requestDataDokter.onreadystatechange = function() {
+                                if(this.readyState == 4 && this.status == 200) {
+                                    dataDokter = JSON.parse(this.responseText);
+                
+                                    if(dataPenduduk !== undefined) {
+                                        buatGrafik(dataPenduduk, dataDokter);
+                                    }
+                                }
+                            };
+                            requestDataDokter.send();
+                        }
+                    </script>
+<br>
+<br>
+<br>
+</div>
+<div class="konten" id="konten">
+<h4 class="pb-2">Daftar Rumah Sakit Rujukan di Jawa Barat
+        </h4>
+        <div class="flex-container">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama RS</th>
+                <th scope="col">Alamat</th>
+                <th scope="col">No. Telepon</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>RSU Dr. Hasan Sadikin</td>
+                <td>Jl. Pasteur No. 38,<br> Kota Bandung</td>
+                <td>@+62 22 2034 953</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>RSAU Dr. M. Salamun Bandung</td>
+                <td>Jl. Ciumbuleuit No.203,<br> Kota Bandung</td>
+                <td>@+62 22 2032090</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>RSTP Dr. H. A. Rotinsulu</td>
+                <td>Jl. Bukit Jarian No.40, Hegarmanah,<br> Kota Bandung</td>
+                <td>@+62 22 2034446</td>
+              </tr>
+            </tbody>
+          </table> 
+        </div>
+        
+      </div>
+      <!-- /.col-lg-9 -->
+      
+
+  <div class="card text-center">
+  
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Call Center</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Nomor Darurat</h6>
+              <p style="font-size: 30px" class="card-text"><i class="fa fa-phone "></i> 199</p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+  </div>
+
+  <!-- Bagian footer dari dashboard -->
+  <footer id="footer">
+    <p>Tim Pengelola Dashboard COVID-19 Indonesia</p>
+  </footer>
+</body>
+
+</html>
